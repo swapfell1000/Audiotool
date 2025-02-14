@@ -6,6 +6,7 @@ using Audiotool.builders;
 using Audiotool.Converters;
 using System.Linq;
 using System.Windows.Threading;
+using System.Windows;
 
 namespace Audiotool.repository;
 
@@ -84,9 +85,9 @@ public class NativeAudioRepo
         }
     }
 
-    public void BuildAWC(string SoundSet, string AudioBank, bool debugFiles = true)
+    public void BuildAWC(string SoundSet, string AudioBank, string? folderPath, bool debugFiles = true)
     {
-        string path = Path.Combine(AppContext.BaseDirectory, "Renewed-Audio");
+        string path = Path.Combine(folderPath ?? AppContext.BaseDirectory, "Renewed-Audio");
         string wavPath = Path.Combine(path, "wav");
         string dataPath = Path.Combine(path, "data");
         string audioDirectoryPath = Path.Combine(path, "audiodirectory");
@@ -109,6 +110,8 @@ public class NativeAudioRepo
         LuaBuilder.AwcFileName = AudioBank;
 
         LuaBuilder.GenerateManifest(path, AudioFiles, true, SoundSet);
+
+        MessageBox.Show("Resource has been build!");
     }
 
 }

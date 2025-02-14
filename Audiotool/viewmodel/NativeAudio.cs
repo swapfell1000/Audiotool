@@ -58,6 +58,17 @@ public class NativeAudio : ViewModelBase
         }
     }
 
+    private string _outputPath;
+
+    public string OutputPath
+    {
+        get { return _outputPath; }
+        set { 
+            _outputPath = value;
+            OnPropertyChanged();
+        }
+    }
+
 
 
 
@@ -69,8 +80,21 @@ public class NativeAudio : ViewModelBase
 
     public RelayCommand DeleteCommand => new(execute => RemoveAudioFile(), canExecute => SelectedAudio != null);
 
-    public RelayCommand ExportCommand => new(execute => _repo.BuildAWC(SoundSetName, AudioBankName), canExecute => AudioFiles != null && AudioFiles.Count > 0);
+    public RelayCommand ExportCommand => new(execute => _repo.BuildAWC(SoundSetName, AudioBankName, OutputPath), canExecute => AudioFiles != null && AudioFiles.Count > 0);
 
+    public RelayCommand OutputFolderCommand => new(execute => SetOutputFolder(), canExecute => true);
+
+
+    private void SetOutputFolder()
+    {
+        var dialog = new OpenFolderDialog();
+        var result = dialog.ShowDialog();
+
+        if (result == true)
+        {
+            OutputPath = dialog.FolderName;
+        }
+    }
 
     private void RemoveAudioFile() => AudioFiles = _repo.RemoveAudioFile(SelectedAudio.FileName);
 
