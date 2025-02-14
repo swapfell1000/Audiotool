@@ -25,3 +25,11 @@ https://ko-fi.com/FjamZoo
 If you see any bugs or have any feature requests please open an Issue.
 
 thanks for reading!
+
+
+## Credits
+- Joe Szymkowicz: https://github.com/JoeSzymkowiczFiveM/native-audio-tool/tree/main (I took some inspiration from this amazing tool)
+- Chat Disabled: https://github.com/ChatDisabled/nativeAudio/tree/master (Did a lot of the audio research)
+- EHBW: https://ehbw.tebex.io/ (Helped with intial implementation and reused a some of his code from prior repositories)
+- CodeWalker: https://github.com/dexyfex/CodeWalker
+- FFMpeg: https://github.com/FFmpeg/FFmpeg
