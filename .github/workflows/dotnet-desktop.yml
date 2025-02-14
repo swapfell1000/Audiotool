@@ -1,7 +1,6 @@
 name: Build WPF App
 
 on:
-  # Build on pushes to main or any tag matching "v*" (e.g. v1.2.3)
   push:
     branches: [ "main" ]
     tags:
@@ -12,53 +11,55 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    
+
     env:
       Configuration: Release
       ProjectFile: Audiotool/Audiotool.csproj
 
     steps:
-      # 1) Check out code
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2) Install .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
-      # 3) Determine version from tag (optional)
       - name: Determine version
         id: version
         run: |
-          $tagRef = "${{ github.ref }}"  # e.g. "refs/tags/v1.2.3"
+          $tagRef = "${{ github.ref }}"
           if ($tagRef -match "refs/tags/v(.*)") {
-            $version = $Matches[1]      # e.g. "1.2.3"
+            $version = $Matches[1]
           }
           else {
-            # If not a tag push, default to 0.0.0
             $version = "0.0.0"
           }
           Write-Host "Version = $version"
           echo "::set-output name=version::$version"
 
-      # 4) Restore & Build
       - name: Restore & Build
         run: |
           dotnet restore $env:ProjectFile
           dotnet build $env:ProjectFile --configuration $env:Configuration /p:Version=${{ steps.version.outputs.version }}
-      
-      # 5) Publish
+
       - name: Publish
         run: |
           dotnet publish $env:ProjectFile --configuration $env:Configuration --output publish /p:Version=${{ steps.version.outputs.version }}
 
-      # 6) Upload published files
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      # This will only run on a tag push like v1.0.0, not on normal pushes/PRs
+      - name: Zip published folder
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          Compress-Archive -Path publish\* -DestinationPath Audiotool.zip
+
+      - name: Upload to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: svenstaro/upload-release-action@v2
         with:
-          name: AudiotoolApp
-          path: publish
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: Audiotool.zip
+          asset_name: Audiotool.zip
+          tag: ${{ github.ref_name }}
