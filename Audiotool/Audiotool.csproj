@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Page Update="view\MainWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="CodeWalker\" />
+      <Folder Include="FFmpeg\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FFMpegCore" Version="5.1.0" />
+        <PackageReference Include="SharpDX.Mathematics" Version="4.2.0" />
+	    <Reference Include="CodeWalker.Core">
+		    <HintPath>CodeWalker\CodeWalker.Core.dll</HintPath>
+	    </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="FFmpeg\ffprobe.exe">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="FFmpeg\ffmpeg.exe">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>

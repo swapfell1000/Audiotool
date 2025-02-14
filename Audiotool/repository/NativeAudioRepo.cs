@@ -1,0 +1,114 @@
+﻿using Audiotool.model;
+using FFMpegCore;
+using System.Collections.ObjectModel;
+using System.IO;
+using Audiotool.builders;
+using Audiotool.Converters;
+using System.Linq;
+
+namespace Audiotool.repository;
+
+public class NativeAudioRepo
+{
+    private readonly ObservableCollection<Audio> AudioFiles = [];
+
+    public async Task AddAudioFile(string path)
+    {
+        IMediaAnalysis info = await FFProbe.AnalyseAsync(path);
+        if (info.PrimaryAudioStream == null)
+        {
+            throw new Exception("Unable to retrieve primary audio stream");
+        }
+
+        string filename = Path.GetFileNameWithoutExtension(path);
+
+        Audio currentAudioFile = AudioFiles.FirstOrDefault(a => a.FileName == filename);
+
+        if (currentAudioFile != null) return;
+
+        Audio audioFile = new()
+        {
+            Codec = "ADPCM",
+            FilePath = path,
+            FileName = filename,
+            FileExtension = Path.GetExtension(path),
+            Samples = (int)Math.Round(info.Duration.TotalSeconds * info.PrimaryAudioStream.SampleRateHz),
+            SampleRate = info.PrimaryAudioStream.SampleRateHz,
+            Duration = info.Duration,
+            Channels = info.PrimaryAudioStream.Channels,
+            FileSize = (ulong)(info.PrimaryAudioStream.BitRate * info.Duration.TotalSeconds * info.PrimaryAudioStream.Channels)
+        };
+
+        AudioFiles.Add(audioFile);
+    }
+
+    public ObservableCollection<Audio> GetAudioFiles() => AudioFiles;
+
+    public ObservableCollection<Audio> RemoveAudioFile(string fileName)
+    {
+        foreach (Audio audio in AudioFiles)
+        {
+            if (audio.FileName == fileName)
+            {
+                AudioFiles.Remove(audio);
+                break;
+            }
+        }
+
+        return AudioFiles;
+    }
+
+    private void BuildRepo(string path, string dataPath, string audioDirectoryPath, string wavPath)
+    {
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        if (!Directory.Exists(dataPath))
+        {
+            Directory.CreateDirectory(dataPath);
+        }
+
+        if (!Directory.Exists(audioDirectoryPath))
+        {
+            Directory.CreateDirectory(audioDirectoryPath);
+        }
+
+        if (!Directory.Exists(wavPath))
+        {
+            Directory.CreateDirectory(wavPath);
+        }
+    }
+
+    public void BuildAWC(string SoundSet, string AudioBank, bool debugFiles = true)
+    {
+        string path = Path.Combine(AppContext.BaseDirectory, "Renewed-Audio");
+        string wavPath = Path.Combine(path, "wav");
+        string dataPath = Path.Combine(path, "data");
+        string audioDirectoryPath = Path.Combine(path, "audiodirectory");
+
+        BuildRepo(path, dataPath, audioDirectoryPath, wavPath);
+
+        if (debugFiles)
+        {
+            string clientPath = Path.Combine(path, "client");
+            if (!Directory.Exists(clientPath))
+            {
+                Directory.CreateDirectory(clientPath);
+            }
+        }
+
+        WavConverter.ConvertToWav(AudioFiles, wavPath);
+        Dat54Builder.ConstructDat54(AudioFiles, path, AudioBank, SoundSet);
+        AWCBuilder.GenerateXML(AudioFiles, audioDirectoryPath, wavPath, AudioBank);
+
+        LuaBuilder.AwcFileName = AudioBank;
+
+        LuaBuilder.GenerateManifest(path, AudioFiles, true, SoundSet);
+    }
+
+    public NativeAudioRepo()
+    {}
+
+}

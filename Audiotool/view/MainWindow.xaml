@@ -1,0 +1,90 @@
+﻿<Window x:Class="Audiotool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Audiotool"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="top"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="147*" MaxWidth="200"/>
+                <ColumnDefinition Width="207*" MaxWidth="200"/>
+                <ColumnDefinition Width="53*" MaxWidth="200"/>
+                <ColumnDefinition Width="247*" MaxWidth="300"/>
+                <ColumnDefinition Width="146*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock 
+                Text="Sound List" 
+                VerticalAlignment="Center" 
+                Margin="20,0,73,0" Grid.ColumnSpan="2" Height="16"
+            />
+            <DataGrid 
+                  Grid.Row="1"   
+                  Grid.ColumnSpan="4"
+                  Margin="20,1,39,34"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  ItemsSource="{Binding AudioFiles}"
+                  SelectedItem="{Binding SelectedAudio}"
+                  CanUserReorderColumns="False"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged" Grid.RowSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="File Name"
+                                    Binding="{Binding FileName}"
+                                    Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="HeadRoom"
+                                    Binding="{Binding Headroom}"
+                                    Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="PlayBegin"
+                                    Binding="{Binding PlayBegin}"
+                                    Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="PlayEnd"
+                                    Binding="{Binding PlayEnd}"
+                                    Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="LoopBegin"
+                                    Binding="{Binding LoopBegin}"
+                                    Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="LoopEnd"
+                                    Binding="{Binding LoopEnd}"
+                                    Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="LoopPoint"
+                                    Binding="{Binding LoopPoint}"
+                                    Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Peak"
+                                    Binding="{Binding Peak}"
+                                    Width="1*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button 
+                Grid.Column="1"
+                Grid.Row="2"
+                Content="Remove File"
+                Command="{Binding DeleteCommand}" Margin="184,4,234,3" Grid.ColumnSpan="3" />
+            <Button Grid.Row="2"
+                Grid.Column="3"
+                Content="Build Resource"
+                Command="{Binding ExportCommand}" Margin="246,4,24,3" RenderTransformOrigin="0.892,0.602" Grid.ColumnSpan="2"/>
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Content="Select Files"
+                Command="{Binding AddFilesCommand}" Margin="20,4,42,3"/>
+            <TextBox Grid.Column="4" HorizontalAlignment="Left" Margin="4,13,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SoundSetName}" VerticalAlignment="Top" Width="120"/>
+            <Label Grid.Column="4" Content="Soundset Name" HorizontalAlignment="Left" Margin="13,20,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+            <TextBox Grid.Column="4" HorizontalAlignment="Left" Margin="4,59,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding AudioBankName}" VerticalAlignment="Top" Width="120"/>
+            <Label Grid.Column="4" Content="Audiobank Name" HorizontalAlignment="Left" Margin="13,36,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+
+
+        </Grid>
+    </DockPanel>
+</Window>
