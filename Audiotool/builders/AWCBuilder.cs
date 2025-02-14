@@ -34,7 +34,7 @@ public static class AWCBuilder
     }
 
 
-    private static void buildAWC(XmlDocument doc, string outputPath, string wavPath, string audioBank)
+    private static void BuildAWC(XmlDocument doc, string outputPath, string wavPath, string audioBank)
     {
         XmlNode? node = doc.SelectNodes("AudioWaveContainer")?[0];
         XmlNode? AWCNode = doc.GetElementsByTagName("AudioWaveContainer").Item(0);
@@ -76,7 +76,7 @@ public static class AWCBuilder
     }
     
     
-    public static void GenerateXML(ObservableCollection<Audio> audioFiles, string outputPath, string wavPath, string audioBank)
+    public static void GenerateXML(List<Audio> audioFiles, string outputPath, string wavPath, string audioBank)
     { 
         var doc = new XmlDocument();
 
@@ -126,7 +126,7 @@ public static class AWCBuilder
             doc.Save(writer);
         }
 
-        buildAWC(doc, outputPath, wavPath, audioBank);
+        BuildAWC(doc, outputPath, wavPath, audioBank);
     }
     
     private static XmlElement CreateStreamsElement(XmlDocument doc, bool streamFormat)

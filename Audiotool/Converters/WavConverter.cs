@@ -7,7 +7,7 @@ namespace Audiotool.Converters;
 
 public static class WavConverter
 {
-    public static void ConvertToWav(ObservableCollection<Audio> audioFiles, string outputFolder)
+    public static void ConvertToWav(List<Audio> audioFiles, string outputFolder)
     {   
         foreach (Audio audio in audioFiles)
         {

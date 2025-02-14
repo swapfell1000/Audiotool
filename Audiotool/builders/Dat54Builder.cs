@@ -39,7 +39,7 @@ public static class Dat54Builder
 
 
     public static void ConstructDat54(
-        ObservableCollection<Audio> audioFiles,
+        List<Audio> audioFiles,
         string outputFolder,
         string audioBankName = "output",
         string soundsetName = "special_soundset",

@@ -5,12 +5,13 @@ using System.IO;
 using Audiotool.builders;
 using Audiotool.Converters;
 using System.Linq;
+using System.Windows.Threading;
 
 namespace Audiotool.repository;
 
 public class NativeAudioRepo
 {
-    private readonly ObservableCollection<Audio> AudioFiles = [];
+    private readonly List<Audio> AudioFiles = [];
 
     public async Task AddAudioFile(string path)
     {
@@ -39,10 +40,11 @@ public class NativeAudioRepo
             FileSize = (ulong)(info.PrimaryAudioStream.BitRate * info.Duration.TotalSeconds * info.PrimaryAudioStream.Channels)
         };
 
-        AudioFiles.Add(audioFile);
+
+       AudioFiles.Add(audioFile);
     }
 
-    public ObservableCollection<Audio> GetAudioFiles() => AudioFiles;
+    public ObservableCollection<Audio> GetAudioFiles() => new(AudioFiles);
 
     public ObservableCollection<Audio> RemoveAudioFile(string fileName)
     {
@@ -55,10 +57,11 @@ public class NativeAudioRepo
             }
         }
 
-        return AudioFiles;
+
+        return new ObservableCollection<Audio>(AudioFiles);
     }
 
-    private void BuildRepo(string path, string dataPath, string audioDirectoryPath, string wavPath)
+    private static void CreateFolders(string path, string dataPath, string audioDirectoryPath, string wavPath)
     {
         if (!Directory.Exists(path))
         {
@@ -88,7 +91,7 @@ public class NativeAudioRepo
         string dataPath = Path.Combine(path, "data");
         string audioDirectoryPath = Path.Combine(path, "audiodirectory");
 
-        BuildRepo(path, dataPath, audioDirectoryPath, wavPath);
+        CreateFolders(path, dataPath, audioDirectoryPath, wavPath);
 
         if (debugFiles)
         {
@@ -107,8 +110,5 @@ public class NativeAudioRepo
 
         LuaBuilder.GenerateManifest(path, AudioFiles, true, SoundSet);
     }
-
-    public NativeAudioRepo()
-    {}
 
 }

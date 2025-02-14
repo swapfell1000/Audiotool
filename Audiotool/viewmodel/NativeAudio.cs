@@ -2,6 +2,7 @@
 using Audiotool.repository;
 using System.Collections.ObjectModel;
 using Audiotool.model;
+using System.Windows;
 
 namespace Audiotool.viewmodel;
 
@@ -62,7 +63,7 @@ public class NativeAudio : ViewModelBase
 
 
 
-    private NativeAudioRepo _repo = new();
+    private readonly NativeAudioRepo _repo;
 
     public RelayCommand AddFilesCommand => new(execute => SelectAudioFiles(), canExecute => true);
 
@@ -90,11 +91,12 @@ public class NativeAudio : ViewModelBase
 
         AudioFiles = _repo.GetAudioFiles();
     }
- 
-    
+
+
     public NativeAudio()
     {
         SoundSetName = "special_soundset";
         AudioBankName = "custom_sounds";
+        _repo = new NativeAudioRepo();
     }
 }
