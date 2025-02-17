@@ -85,7 +85,7 @@ public class NativeAudioRepo
         }
     }
 
-    public void BuildAWC(string SoundSet, string AudioBank, string? folderPath, bool debugFiles = true)
+    public void BuildAWC(string SoundSet, string AudioBank, string? folderPath, ObservableCollection<Audio> _newList, bool debugFiles = true)
     {
         string path = Path.Combine(folderPath ?? AppContext.BaseDirectory, "Renewed-Audio");
         string wavPath = Path.Combine(path, "wav");

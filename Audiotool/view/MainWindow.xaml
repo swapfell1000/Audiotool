@@ -37,7 +37,8 @@
                   SelectedItem="{Binding SelectedAudio}"
                   CanUserReorderColumns="False"
                   AutoGenerateColumns="False"
-                  IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged" Grid.RowSpan="2">
+                  IsReadOnly="False"
+                  Grid.RowSpan="2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="File Name"
                                     Binding="{Binding FileName}"
@@ -64,7 +65,7 @@
                                     Binding="{Binding Peak}"
                                     Width="1*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Volume"
-                                    Binding="{Binding Volume}"
+                                    Binding="{Binding Volume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>

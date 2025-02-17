@@ -80,7 +80,7 @@ public class NativeAudio : ViewModelBase
 
     public RelayCommand DeleteCommand => new(execute => RemoveAudioFile(), canExecute => SelectedAudio != null);
 
-    public RelayCommand ExportCommand => new(execute => _repo.BuildAWC(SoundSetName, AudioBankName, OutputPath), canExecute => AudioFiles != null && AudioFiles.Count > 0);
+    public RelayCommand ExportCommand => new(execute => _repo.BuildAWC(SoundSetName, AudioBankName, OutputPath, AudioFiles), canExecute => AudioFiles != null && AudioFiles.Count > 0);
 
     public RelayCommand OutputFolderCommand => new(execute => SetOutputFolder(), canExecute => true);
 
