@@ -67,7 +67,7 @@ public static class Dat54Builder
         dat54Elem.AppendChild(itemsElem);
 
         // For each audio file, create <Item type="SimpleSound"> more research is needed to figure out other types but IDGAF rn I just want to die
-        foreach (var audio in audioFiles)
+        foreach (Audio audio in audioFiles)
         {
             var soundItem = doc.CreateElement("Item");
             soundItem.SetAttribute("type", "SimpleSound");
@@ -85,7 +85,7 @@ public static class Dat54Builder
             headerElem.AppendChild(flagsElem);
 
             var volumeElem = doc.CreateElement("Volume");
-            volumeElem.SetAttribute("value", "200");
+            volumeElem.SetAttribute("value", audio.Volume.ToString());
             headerElem.AppendChild(volumeElem);
 
             var categoryElem = doc.CreateElement("Category");

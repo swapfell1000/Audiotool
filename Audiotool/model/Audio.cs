@@ -30,6 +30,7 @@ public class Audio
     public int LoopEnd { get; set; } = 0;
     public int LoopPoint { get; set; } = -1;
     public int Peak { get; set; } = 0;
+    public int Volume { get; set; } = 200;
     
     public List<Marker> Markers { get; set; } = [];
     

@@ -63,6 +63,9 @@
                     <DataGridTextColumn Header="Peak"
                                     Binding="{Binding Peak}"
                                     Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Volume"
+                                    Binding="{Binding Volume}"
+                                    Width="1*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Button 
